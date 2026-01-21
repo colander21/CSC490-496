@@ -10,14 +10,14 @@ m3 = 1.0 * 10**22
 # Initial conditions
 p1 = np.array([0.0, 0.0])
 p2 = np.array([1.0 * 10**8, 0.0])
-# p3 = p2 + np.array([0.0, 5.0 * 10**6])
-# p3 = np.array([-1.0 * 10**8, 0.0])
-p3 = np.array([-1.0e8,  -1.0e8])
+# p3 = p2 + np.array([0.0, 5.0 * 10**6]) # captured into orbit
+# p3 = np.array([-1.0 * 10**8, 0.0]) # escapes system
+p3 = np.array([-1.0 * 10**8,  -1.0 * 10**8]) # chaotic
 v1 = np.array([0.0, 0.0])
 v2 = np.array([0.0, 1.0 * 10**3])
-# v3 = np.array([math.sqrt(G * m2 / (5.0 * 10**6)), 0.0])
-# v3 = np.array([-5.0 * 10**3, 0.0])
-v3 = np.array([1000.0, 100.0])
+# v3 = np.array([math.sqrt(G * m2 / (5.0 * 10**6)), 0.0]) # captured into orbit
+# v3 = np.array([-5.0 * 10**3, 0.0]) # escapes system
+v3 = np.array([1000.0, 100.0]) # chaotic
 d12 = math.sqrt((p2[0] - p1[0])**2 + (p2[1] - p1[1])**2)
 d13 = math.sqrt((p3[0] - p1[0])**2 + (p3[1] - p1[1])**2)
 d23 = math.sqrt((p3[0] - p2[0])**2 + (p3[1] - p2[1])**2)
@@ -171,7 +171,6 @@ plt.title("3-Body Motion (Center-of-Mass Frame)")
 plt.show()
 
 
-
 plt.figure()
 plt.plot((E - E[0]) / abs(E[0]))
 plt.xlabel("step"); plt.ylabel("Relative energy error"); plt.title("Energy conservation")
@@ -184,5 +183,5 @@ plt.show()
 
 plt.figure()
 plt.plot(P_total[:,0], label="Px"); plt.plot(P_total[:,1], label="Py")
-plt.legend(); plt.title("Total linear momentum (should be constant)")
+plt.legend(); plt.title("Total linear momentum")
 plt.show()
